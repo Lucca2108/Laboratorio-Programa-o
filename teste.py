@@ -26,5 +26,4 @@ def caminho(lugar):
         return "Você subiu a montanha. A vista é incrível! Mas cuidado com os penhascos e os animais selvagens!"
     elif lugar == "Caverna":
         return "Você entrou na caverna. Frio, escura e úmida... o que será que tem lá dentro?"  
-    else:
-        return "Lugar desconhecido. Tente novamente."
+    raise ValueError("Lugar desconhecido. Tente novamente.")
