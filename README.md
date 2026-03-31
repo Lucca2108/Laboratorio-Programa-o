@@ -61,7 +61,7 @@ python historia.py
 ### 🧪 Executar os testes
 
 ```
-python -m unittest teste.py
+python -m unittest teste1.py
 ```
 
 Se tudo estiver correto, o resultado será:
