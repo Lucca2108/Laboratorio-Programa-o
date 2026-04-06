@@ -61,7 +61,10 @@ python historia.py
 ### 🧪 Executar os testes
 
 ```
-python -m unittest teste1.py
+python -m unittest teste_jogo.py 
+ou 
+python3 -m unittest teste_jogo
+
 ```
 
 Se tudo estiver correto, o resultado será:
