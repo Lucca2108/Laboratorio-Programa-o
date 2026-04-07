@@ -26,9 +26,30 @@ def ataque_cavaleiro(contexto: str = "") -> int:
     return resultado
 
 
-def atacar(classe: str) -> int:
-    rolagem = d20("rolagem de ataque")
+def atacar(classe: str, modificador: int = 0, ca_alvo: int = 10) -> int:
+    """
+    Realiza a tentativa de ataque de uma criatura/ personagem.
 
+    Parâmetros:
+        classe (str): nome da classe que determina o dado de dano (mago, arqueiro, cavaleiro)
+        modificador (int): bônus somado à rolagem do d20
+        ca_alvo (int): Classe de Armadura do alvo (valor alvo para acertar)
+
+    Retorno:
+        int: dano causado (0 se errar)
+    """
+
+    rolagem = d20("rolagem de ataque")
+    total = rolagem + modificador
+
+    # Verifica acerto: total >= CA do alvo
+    if total < ca_alvo:
+        # Errou o ataque
+        if rolagem == 1:
+            print("Falha crítica!")
+        return 0
+
+    # Acertou: calcula dano conforme a classe
     if classe == "mago":
         dano = ataque_mago("dano do mago")
     elif classe == "arqueiro":
@@ -39,6 +60,7 @@ def atacar(classe: str) -> int:
         print("Classe inválida.")
         return 0
 
+    # Acerto crítico natural (20) dobra o dano
     if rolagem == 20:
         dano *= 2
         print("Acerto crítico! Dano dobrado.")

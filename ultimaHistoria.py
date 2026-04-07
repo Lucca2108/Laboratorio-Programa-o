@@ -147,7 +147,7 @@ def criar_personagem():
             magia = escolher(f"  ({falta} restante(s)):", opcoes_restantes)
             magias_escolhidas.append(magia)
             opcoes_restantes.remove(magia)  # evita escolher a mesma magia duas vezes
-            print(f"  ✓ {magia} adicionada!")
+            print(f"\n  ✓ {magia} adicionada!")
 
         # Cria o objeto Mago e substitui a lista padrão pelas magias escolhidas
         personagem = Mago(nome)
