@@ -8,7 +8,7 @@ pocaoCuraGrande = 0
 
 nomePersonagem = input("Digite o nome da sua personagem: ")
 
-print(f"\n Olá {nomePersonagem}! Seja bem-vindo(a) à nossa mini jornada Heroica! É bom que você esteja preparado!\nVocê tem {vida} de vida\nVocê está no nível {nivel}")
+print(f"\nOlá {nomePersonagem}! Seja bem-vindo(a) à nossa mini jornada Heroica! É bom que você esteja preparado!\nVocê tem *{vida}* de vida\nVocê está no nível *{nivel}*")
 print("")
 print("")
 
