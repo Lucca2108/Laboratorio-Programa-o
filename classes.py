@@ -53,7 +53,7 @@ class Mago(Personagem):
         super().__init__(
             nome=nome,
             classe="mago",
-            vida=80,
+            vida=30,
             armadura=10,
             velocidade=25,
             ca=12,
@@ -92,10 +92,10 @@ class Arqueiro(Personagem):
         super().__init__(
             nome=nome,
             classe="arqueiro",
-            vida=100,
+            vida=40,
             armadura=20,
             velocidade=30,
-            ca=14,
+            ca=17,
             modificador_ataque=6
         )
 
@@ -105,7 +105,7 @@ class Cavaleiro(Personagem):
         super().__init__(
             nome=nome,
             classe="cavaleiro",
-            vida=150,
+            vida=55,
             armadura=50,
             velocidade=10,
             ca=16,
