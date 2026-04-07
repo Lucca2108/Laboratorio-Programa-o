@@ -8,17 +8,27 @@ class TestClasses(unittest.TestCase):
         mago = Mago("Merlin")
         self.assertEqual(mago.nome, "Merlin")
         self.assertEqual(mago.classe, "mago")
-        self.assertEqual(mago.vida, 80)
+        self.assertEqual(mago.vida, 30)
 
     def test_arqueiro_criado(self):
         arqueiro = Arqueiro("Legolas")
         self.assertEqual(arqueiro.classe, "arqueiro")
-        self.assertEqual(arqueiro.vida, 100)
+        self.assertEqual(arqueiro.vida, 40)
 
     def test_cavaleiro_espada(self):
         cavaleiro = Cavaleiro("Arthur", "espada")
         self.assertEqual(cavaleiro.arma, "espada")
         self.assertEqual(cavaleiro.bonus_dano, 2)
+        
+    def test_cavaleiro_criado(self):
+        cavaleiro = Cavaleiro("Lancelot", "machado")
+        self.assertEqual(cavaleiro.nome, "Lancelot")
+        self.assertEqual(cavaleiro.classe, "cavaleiro")
+        self.assertEqual(cavaleiro.vida, 55)
+        self.assertEqual(cavaleiro.armadura, 50)
+        self.assertEqual(cavaleiro.velocidade, 10)
+        self.assertEqual(cavaleiro.ca, 16)
+        self.assertEqual(cavaleiro.modificador_ataque, 5)
 
     def test_cavaleiro_machado(self):
         cavaleiro = Cavaleiro("Thor", "machado")
