@@ -6,7 +6,7 @@ Este projeto consiste em um jogo interativo em Python, inspirado em RPGs clássi
 
 O jogador explora uma ruína misteriosa, enfrenta inimigos, coleta itens e evolui seu personagem ao longo da jornada.
 
-Além disso, o projeto aplica conceitos fundamentais de programação, como funções, tratamento de erros e testes unitários.
+Além disso, o projeto aplica conceitos fundamentais de programação, como funções, herança, programatratamento de erros e testes unitários.
 
 ---
 
@@ -62,10 +62,9 @@ python historia.py
 
 ```
 python -m unittest teste_jogo.py
+python -m unittest teste_classes.py
 ```
-
 Se tudo estiver correto, o resultado será:
-
 ```
 OK
 ```
