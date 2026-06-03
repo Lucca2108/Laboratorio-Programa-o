@@ -129,15 +129,11 @@ class Cavaleiro(Personagem):
             inimigo.sofrer_dano(dano)
             print(f"{self.nome} atacou com {self.arma} e causou {dano} de dano em {inimigo.nome}!")
         else:
-<<<<<<< HEAD
-            print(f"{self.nome} errou o ataque em {inimigo.nome}!")
-=======
             print(f"{self.nome} errou o ataque em {inimigo.nome}!")
 
 
 # ─────────────────────────────────────────
-# ADICIONADO: funções auxiliares e criar_personagem
-# movidas do arquivo principal (jogo.py)
+# FUNÇÕES AUXILIARES
 # ─────────────────────────────────────────
 
 def linha():
@@ -213,4 +209,3 @@ def criar_personagem():
     print(f"\n  {personagem.nome} está pronto para a aventura!")
     pausar()
     return personagem
->>>>>>> rpg
