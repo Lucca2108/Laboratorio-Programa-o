@@ -1,4 +1,8 @@
 from dados import atacar, ataque_mago
+<<<<<<< HEAD
+=======
+from classes import criar_personagem
+>>>>>>> rpg
 from funcoes import calcular_vida, curar, esta_vivo, upar_nivel
 from classes import Mago, Arqueiro, Cavaleiro, Personagem
 import time
@@ -31,6 +35,7 @@ def pausar():
     input("\n  [ENTER para continuar...]\n")
 
 
+<<<<<<< HEAD
 def criar_personagem():
     titulo("CRIAÇÃO DO PERSONAGEM")
 
@@ -78,6 +83,8 @@ def criar_personagem():
     return personagem
 
 
+=======
+>>>>>>> rpg
 def turno_mago(heroi, inimigo):
     acao = escolher("\n  O que você faz?", heroi.magias + ["Ataque básico"])
 
