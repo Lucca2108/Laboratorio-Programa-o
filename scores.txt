@@ -1,0 +1,5 @@
+Jogador: Lucca | Classe: Mago | Nível: 3 | Pontuação: 250 | Resultado: Vitória
+Jogador: Arthur | Classe: Arqueiro | Nível: 2 | Pontuação: 180 | Resultado: Derrota
+Jogador: Vitor | Classe: Cavaleiro | Nível: 3 | Pontuação: 310 | Resultado: Vitória
+Jogador: Danilo | Classe: Mago | Nível: 4 | Pontuação: 420 | Resultado: Vitória
+Jogador: Cauâ| Classe: Cavaleiro | Nível: 1 | Pontuação: 90 | Resultado: Derrota
