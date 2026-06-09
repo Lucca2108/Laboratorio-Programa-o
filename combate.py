@@ -53,7 +53,7 @@ def criar_esqueleto():
 def criar_guardiao_fantasma():
     return Personagem(
         nome="Guardião Fantasma",
-        classe="mago",
+        classe="guardiao",
         vida=70,
         armadura=10,
         velocidade=15,
