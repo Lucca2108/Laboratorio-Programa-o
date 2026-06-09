@@ -1,0 +1,7 @@
+Jogador: Xande | Classe: Arqueiro | Nível: 1 | Pontuação: 200 | Resultado: Derrota
+
+Jogador: Xande | Classe: Arqueiro | Nível: 1 | Pontuação: 0 | Resultado: Derrota
+
+Jogador: Teste | Classe: Mago | Nível: 1 | Pontuação: 123 | Resultado: Venceu
+
+Jogador: Guizo | Classe: Cavaleiro | Nível: 2 | Pontuação: 529 | Resultado: Venceu

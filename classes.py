@@ -130,3 +130,82 @@ class Cavaleiro(Personagem):
             print(f"{self.nome} atacou com {self.arma} e causou {dano} de dano em {inimigo.nome}!")
         else:
             print(f"{self.nome} errou o ataque em {inimigo.nome}!")
+
+
+# ─────────────────────────────────────────
+# FUNÇÕES AUXILIARES
+# ─────────────────────────────────────────
+
+def linha():
+    print("─" * 42)
+
+
+def titulo(texto):
+    linha()
+    print(f"  {texto}")
+    linha()
+
+
+def escolher(pergunta, opcoes):
+    print(pergunta)
+    for i, opcao in enumerate(opcoes, 1):
+        print(f"  [{i}] {opcao}")
+
+    while True:
+        entrada = input("> ").strip()
+        if entrada.isdigit():
+            entrada = int(entrada)
+            if 1 <= entrada <= len(opcoes):
+                return opcoes[entrada - 1]
+        print("  Escolha inválida. Tente de novo.")
+
+
+def pausar():
+    input("\n  [ENTER para continuar...]\n")
+
+
+def criar_personagem():
+    titulo("CRIAÇÃO DO PERSONAGEM")
+
+    nome = ""
+    while not nome:
+        nome = input("  Qual é o nome do seu personagem?\n> ").strip()
+        if not nome:
+            print("  O nome não pode estar vazio.")
+
+    classe = escolher("\n  Escolha sua classe:", ["Mago", "Arqueiro", "Cavaleiro"])
+
+    if classe == "Mago":
+        magias_disponiveis = [
+            "Bola de Fogo",
+            "Raio de Gelo",
+            "Relâmpago",
+            "Cura Arcana",
+            "Escudo Mágico"
+        ]
+
+        print("\n  Escolha 3 magias para o seu grimório:")
+        magias_escolhidas = []
+
+        while len(magias_escolhidas) < 3:
+            magia = escolher(
+                f"  Escolha a magia {len(magias_escolhidas) + 1}:",
+                magias_disponiveis
+            )
+            magias_escolhidas.append(magia)
+            magias_disponiveis.remove(magia)
+            print(f"  ✓ {magia} adicionada!")
+
+        personagem = Mago(nome)
+        personagem.magias = magias_escolhidas
+
+    elif classe == "Arqueiro":
+        personagem = Arqueiro(nome)
+
+    else:
+        arma = escolher("\n  Escolha sua arma:", ["Espada", "Machado"])
+        personagem = Cavaleiro(nome, arma=arma.lower())
+
+    print(f"\n  {personagem.nome} está pronto para a aventura!")
+    pausar()
+    return personagem

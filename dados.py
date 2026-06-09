@@ -2,8 +2,6 @@ import random
 
 def d20(contexto: str = "") -> int:
     resultado = random.randint(1, 20)
-    if contexto:
-        print(f"[d20] {contexto}: {resultado}")
     return resultado
 
 # dano base das classes

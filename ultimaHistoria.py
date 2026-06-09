@@ -1,4 +1,8 @@
 from dados import atacar, ataque_mago
+<<<<<<< HEAD
+=======
+from classes import criar_personagem
+>>>>>>> rpg
 from funcoes import calcular_vida, curar, esta_vivo, upar_nivel
 from classes import Mago, Arqueiro, Cavaleiro, Personagem
 import time
@@ -31,6 +35,7 @@ def pausar():
     input("\n  [ENTER para continuar...]\n")
 
 
+<<<<<<< HEAD
 def criar_personagem():
     titulo("CRIAÇÃO DO PERSONAGEM")
 
@@ -78,6 +83,8 @@ def criar_personagem():
     return personagem
 
 
+=======
+>>>>>>> rpg
 def turno_mago(heroi, inimigo):
     acao = escolher("\n  O que você faz?", heroi.magias + ["Ataque básico"])
 
@@ -146,7 +153,7 @@ def combate(heroi, inimigo):
 
         else:
             heroi.atacar_inimigo(inimigo)
-            time.sleep(3)   # pausa de 3 segundos antes do inimigo atacar
+            time.sleep(4)   # pausa de 4 segundos antes do inimigo atacar
 
         if esta_vivo(inimigo.vida):
             dano_inimigo = atacar(inimigo.classe.lower(), inimigo.modificador_ataque, heroi.ca)
@@ -215,15 +222,15 @@ def chegada(heroi):
 def criar_inimigo():
     titulo("O HABITANTE DA FAZENDA")
     print("""
-  Do celeiro surge um Espantalho Amaldiçoado,
+  Do celeiro surge um Arqueiro Amaldiçoado,
   feito de palha, magia negra e ódio.
     """)
     pausar()
 
     return Personagem(
-        nome="Espantalho Amaldiçoado",
+        nome="Arqueiro Amaldiçoado",
         classe="arqueiro",
-        vida=50,
+        vida=30,
         armadura=5,
         velocidade=10,
         ca=15,
@@ -236,7 +243,7 @@ def desfecho(heroi, vitoria):
 
     if vitoria:
         print(f"""
-  O Espantalho caiu.
+  O Arqueiro caiu.
 
   {heroi.nome} sobreviveu à Fazenda Maldita
   com {heroi.vida} PV restantes.

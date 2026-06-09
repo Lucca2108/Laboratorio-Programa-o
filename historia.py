@@ -1,186 +1,245 @@
-from funcoes import calcular_vida, curar, esta_vivo, upar_nivel
-
-vida = 20
-nivel = 1
-itensRaros = 0
-pocaoCura = 0
-pocaoCuraGrande = 0
-
-nomePersonagem = input("Digite o nome da sua personagem: ")
-
-print(f"\nOlá {nomePersonagem}! Seja bem-vindo(a) à nossa mini jornada Heroica! É bom que você esteja preparado!\nVocê tem *{vida}* de vida\nVocê está no nível *{nivel}*")
-print("")
-print("")
+from combate import combate, criar_mumia, criar_guardiao_fantasma, criar_esqueleto
+from funcoes import curar
 
 
-def entrada_valida(texto, opcoes):
+def linha():
+    print("─" * 42)
+
+
+def titulo(texto):
+    linha()
+    print(f"  {texto}")
+    linha()
+
+
+def escolher(pergunta, opcoes):
+    print(pergunta)
+    for i, opcao in enumerate(opcoes, 1):
+        print(f"  [{i}] {opcao}")
     while True:
-        try:
-            escolha = int(input(texto))
-            if escolha in opcoes:
-                return escolha
-            print(f"Opção inválida. Digite {', '.join(map(str, opcoes))}.")
-        except:
-            print("Digite um número válido.")
+        entrada = input("> ").strip()
+        if entrada.isdigit():
+            entrada = int(entrada)
+            if 1 <= entrada <= len(opcoes):
+                return opcoes[entrada - 1]
+        print("  Escolha inválida. Tente de novo.")
 
 
-escolha1 = entrada_valida(
-    "Você deseja adentrar-se na Ruína? \n1-SIM \n2-NÃO \n", [1, 2]
-)
+def pausar():
+    input("\n  [ENTER para continuar...]\n")
 
-if escolha1 == 2:
-    print("Você saiu antes do game começar!")
 
-elif escolha1 == 1:
-    escolha2 = entrada_valida(
-        "\n Muito bem! Você é um(a) aventureira(o) bem corajoso(a)! \nAssim que você entra na Ruína é possível ver uma poção de cura, deseja pegá-la? \n1-SIM \n2-NÃO \n",
-        [1, 2],
-    )
+def iniciar_historia(heroi):
+    inventario = {
+        "pocao_cura": 0,
+        "pocao_cura_grande": 0,
+        "amuleto_fantasmagorico": False
+    }
+    pontuacao = 0
 
-    if escolha2 == 1:
-        pocaoCura += 1
-        print(f"\n Poção coletada com sucesso! Você possui {pocaoCura} poção de cura.")
+    titulo("A RUÍNA FANTASMAGÓRICA")
+    print(f"""
+  Uma névoa espessa envolve as antigas ruínas de Valdrim.
+  Aventureiros desapareceram ao entrar nelas.
+  Ninguém voltou para contar o que há lá dentro.
 
-    print("")
+  {heroi.nome}, você veio descobrir a verdade.
+    """)
+    pausar()
 
-    escolha3 = entrada_valida(
-        "\nVocê continua andando pela Ruína e se depara com uma Múmia, deseja enfrentá-la? \n1-SIM \n2-Tentar passar escondido \n3-Fugir da Ruína \n",
-        [1, 2, 3],
-    )
+    titulo("A ENTRADA")
+    print("""
+  Diante de você há três caminhos:
+  uma porta de pedra coberta de musgo,
+  uma janela quebrada no lado esquerdo,
+  e uma passagem oculta atrás de uma pedra solta.
+    """)
 
-    if escolha3 == 1:
-        print(f"\nVocê vai pra cima da Múmia e acaba pegando ela de surpresa, você consegue acertar um ataque nela, mas antes de matá-la, a Múmia acaba mordendo seu braço, causando 5 de dano.")
-        vida = calcular_vida(vida, 5)
+    caminho = escolher("  Por onde você entra?", [
+        "Porta de pedra",
+        "Janela quebrada",
+        "Passagem oculta"
+    ])
 
-        if not esta_vivo(vida):
-            print("\nVocê morreu")
-            exit()
+    if caminho == "Porta de pedra":
+        print("""
+  Você empurra a porta pesada. Ela abre com um estrondo.
+  Uma armadilha de pedras cai sobre você!
+        """)
+        heroi.sofrer_dano(8)
+        print(f"  Você sofreu 8 de dano! ({heroi.vida} PV restantes)")
+    elif caminho == "Janela quebrada":
+        print("""
+  Você se esgueira pela janela com cuidado.
+  Sem barulho. Sem problemas.
+        """)
+    else:
+        print("""
+  A passagem oculta te leva por um corredor secreto.
+  Você encontra uma poção esquecida no chão!
+        """)
+        inventario["pocao_cura"] += 1
+        pontuacao += 50
+        print("  +1 Poção de Cura adicionada! (+50 pontos)")
 
-        print(f"\n Você está com {vida} de vida")
+    pausar()
 
-    elif escolha3 == 2:
-        print("\n Você tenta passar por uma parte mais escura e afastada da Múmia, mas ela pega vc de surpresa. Vocês lutam bastante, mas antes de você conseguir matar a múmia, ela te morde e te arranha.\nVocê toma 10 de dano.")
-        vida = calcular_vida(vida, 10)
+    if not heroi.vivo():
+        print(f"\n  {heroi.nome} foi esmagado pela armadilha. Fim.\n")
+        return pontuacao, inventario
 
-        if not esta_vivo(vida):
-            print("\nVocê morreu")
-            exit()
+    titulo("O PRIMEIRO ANDAR")
+    print("""
+  O corredor está frio e silencioso.
+  Tochas apagadas nas paredes. O cheiro de terra úmida.
+  Ao fundo, dois caminhos se bifurcam.
+    """)
 
-        print(f"\nVocê está com {vida} de vida")
+    escolha1 = escolher("  Qual direção você segue?", [
+        "Corredor da esquerda (parece mais escuro)",
+        "Corredor da direita (tem luz fraca)"
+    ])
 
-    elif escolha3 == 3:
-        print("\nSe não quisesse jogar era melhor nem ter entrado nas Ruínas.")
-        exit()
-
-    if pocaoCura > 0:
-        escolha4 = entrada_valida(
-            "\nVocê possui uma poção de cura, deseja usar? \n1-SIM \n2-NÃO\n",
-            [1, 2],
-        )
-
-        if escolha4 == 1:
-            vida = curar(vida, 5)
-            pocaoCura -= 1
-            print(f"\nAgora você está com {vida} de vida")
-
-    print("")
-    nivel, vida = upar_nivel(nivel, vida)
-    print(f"Parabéns, você upou de nível! Agora você é nível {nivel} e está com {vida} de vida.")
-    print("")
-
-    escolha5 = entrada_valida(
-        "\nApós derrotar a Múmia, você encontra dois caminhos.\n1-Seguir pelo corredor da esquerda\n2-Seguir pelo corredor da direita\n3-Voltar e sair\n",
-        [1, 2, 3],
-    )
-
-    if escolha5 == 1:
-        print("\nVocê segue pelo corredor da esquerda e encontra uma sala antiga com um baú empoeirado no centro.")
-
-        escolha6 = entrada_valida("\nDeseja abrir o baú?\n1-SIM\n2-NÃO\n", [1, 2])
-
-        if escolha6 == 1:
-            print("\nVocê abre o baú e encontra um Amuleto Fantasmagórico, um item raro envolto em energia azul, além de uma poção de cura grande.")
-            itensRaros += 1
-            pocaoCuraGrande += 1
-            print(f"Agora você possui {itensRaros} item raro.")
-            print(f"Agora você possui {pocaoCuraGrande} poção de cura grande.")
-
-            escolhaPocao = entrada_valida(
-                "Você deseja usar a poção de cura grande agora? \n1-SIM\n2-NÃO\n",
-                [1, 2],
-            )
-
-            if escolhaPocao == 1:
-                vida = curar(vida, 10)
-                pocaoCuraGrande -= 1
-                print(f"Agora você está com {vida} de vida.")
-
+    if escolha1 == "Corredor da esquerda (parece mais escuro)":
+        titulo("EMBOSCADA!")
+        print("""
+  Das sombras surge uma Múmia!
+  Suas bandagens estão ensanguentadas e seus olhos brilham.
+        """)
+        pausar()
+        mumia = criar_mumia()
+        venceu = combate(heroi, mumia)
+        if not venceu:
+            print(f"\n  {heroi.nome} foi derrotado pela Múmia. Fim.\n")
+            return pontuacao, inventario
+        pontuacao += 100
+        print("  Você venceu a Múmia! (+100 pontos)")
+        abrir = escolher("  Você encontra um baú. O que faz?", [
+            "Abro o baú",
+            "Ignoro e sigo em frente"
+        ])
+        if abrir == "Abro o baú":
+            inventario["pocao_cura_grande"] += 1
+            pontuacao += 50
+            print("  +1 Poção de Cura Grande! (+50 pontos)")
+    else:
+        titulo("O CORREDOR DA LUZ")
+        print("""
+  Uma câmara iluminada. No centro, um altar com uma poção brilhante.
+        """)
+        pegar = escolher("  O que você faz?", [
+            "Pego a poção do altar",
+            "Desconfio e não toco"
+        ])
+        if pegar == "Pego a poção do altar":
+            inventario["pocao_cura"] += 1
+            pontuacao += 50
+            print("  +1 Poção de Cura! (+50 pontos)")
         else:
-            print("Você esqueceu de pensar e seguiu sem abrir o baú da Ruína.")
+            print("""
+  Sábia decisão. O altar afundou — era uma armadilha.
+            """)
 
-    elif escolha5 == 2:
-        print("Você segue pelo corredor da direita, mas pisa em uma armadilha escondida. Lâminas surgem da parede e atingem você.")
-        vida = calcular_vida(vida, 4)
+    pausar()
 
-        if not esta_vivo(vida):
-            print("Você morreu")
-            exit()
+    titulo("O SEGUNDO ANDAR")
+    pausar()
 
-        print(f"Você sobreviveu à armadilha e agora está com {vida} de vida.")
+    titulo("EMBOSCADA: ESQUELETO!")
+    print("""
+  Um Esqueleto Guerreiro surge brandindo uma lança enferrujada.
+    """)
+    pausar()
+    esqueleto = criar_esqueleto()
+    venceu = combate(heroi, esqueleto)
+    if not venceu:
+        print(f"\n  {heroi.nome} foi derrotado pelo Esqueleto. Fim.\n")
+        return pontuacao, inventario
+    pontuacao += 100
+    print("  Você venceu o Esqueleto! (+100 pontos)")
 
-    elif escolha5 == 3:
-        print("Você volta e sai da Ruína, perdendo uma grande aventura.")
-        exit()
+    heroi.subir_nivel()
+    pontuacao += 75
+    print("  Você subiu de nível! (+75 pontos)")
+    pausar()
 
-    print("")
-    print("Depois de avançar mais um pouco, você chega ao salão principal da Ruína. \nNo centro do salão surge o Guardião Fantasma, protegendo a relíquia mais valiosa do lugar.")
-    print("")
+    titulo("A CÂMARA DO AMULETO")
+    print("""
+  No pedestal central repousa o Amuleto Fantasmagórico,
+  brilhando com uma luz espectral azul-esverdeada.
+    """)
 
-    escolha7 = entrada_valida(
-        "O que você deseja fazer?\n1-Enfrentar o Guardião Fantasma\n2-Tentar conversar com ele\n3-Fugir\n",
-        [1, 2, 3],
-    )
+    pegar_amuleto = escolher("  O que você faz?", [
+        "Pego o Amuleto Fantasmagórico",
+        "Deixo o amuleto e sigo"
+    ])
 
-    if escolha7 == 1:
-        if itensRaros > 0:
-            print("O Amuleto Fantasmagórico começa a brilhar e enfraquece o Guardião. \nVocê trava uma batalha intensa, mas consegue vencê-lo tomando apenas 4 de dano.")
-            vida = calcular_vida(vida, 4)
-        else:
-            print("Sem nenhum item raro para ajudá-lo, o Guardião Fantasma mostra toda sua força. \nVocê consegue vencê-lo por pouco, mas sofre 14 de dano.")
-            vida = calcular_vida(vida, 14)
+    if pegar_amuleto == "Pego o Amuleto Fantasmagórico":
+        inventario["amuleto_fantasmagorico"] = True
+        pontuacao += 50
+        print("  +Amuleto Fantasmagórico equipado! (+50 pontos)")
+    else:
+        print("  Você deixa o amuleto para trás.")
 
-        if not esta_vivo(vida):
-            print("Você morreu")
-            exit()
+    pausar()
 
-        print(f"Depois da batalha, você ficou com {vida} de vida.")
+    if inventario["pocao_cura"] > 0 or inventario["pocao_cura_grande"] > 0:
+        titulo("ANTES DO CONFRONTO FINAL")
+        print(f"  {heroi.nome} está com {heroi.vida} PV.")
+        opcoes_pocao = []
+        if inventario["pocao_cura"] > 0:
+            opcoes_pocao.append("Usar Poção de Cura (recupera 20 PV)")
+        if inventario["pocao_cura_grande"] > 0:
+            opcoes_pocao.append("Usar Poção de Cura Grande (recupera 40 PV)")
+        opcoes_pocao.append("Não usar nada")
 
-    elif escolha7 == 2:
-        if itensRaros > 0:
-            print("Ao ver o Amuleto Fantasmagórico em suas mãos, o Guardião reconhece sua coragem. \nEle se ajoelha diante de você e permite sua passagem sem lutar.")
-        else:
-            print("O Guardião não acredita em suas palavras e ataca você com uma rajada espiritual.")
-            vida = calcular_vida(vida, 6)
+        usar = escolher("  Usar alguma poção?", opcoes_pocao)
+        if usar == "Usar Poção de Cura (recupera 20 PV)":
+            heroi.vida = curar(heroi.vida, 20)
+            inventario["pocao_cura"] -= 1
+            print(f"  ({heroi.vida} PV)")
+        elif usar == "Usar Poção de Cura Grande (recupera 40 PV)":
+            heroi.vida = curar(heroi.vida, 40)
+            inventario["pocao_cura_grande"] -= 1
+            print(f"  ({heroi.vida} PV)")
+        pausar()
 
-            if not esta_vivo(vida):
-                print("Você morreu")
-                exit()
+    titulo("O GUARDIÃO FANTASMA")
+    print(f"""
+  Uma figura translúcida se materializa.
+  "Nenhum mortal sai daqui vivo."
 
-            print(f"Você sobreviveu ao ataque e está com {vida} de vida.")
+  {heroi.nome} ergue sua arma. A batalha final começa.
+    """)
+    pausar()
 
-    elif escolha7 == 3:
-        print("Você foge da batalha final e abandona a Ruína sem descobrir seus segredos.")
-        exit()
+    guardiao = criar_guardiao_fantasma()
 
-    print("")
-    nivel, vida = upar_nivel(nivel, vida)
-    
-    print(f"Parabéns, você upou de nível novamente! Agora você é nível {nivel} e está com {vida} de vida.")
-    print("")
+    if inventario["amuleto_fantasmagorico"]:
+        print("""
+  O Amuleto brilha! O Guardião está enfraquecido — perde 15 PV!
+        """)
+        guardiao.sofrer_dano(15)
 
-    print("Com o Guardião derrotado ou convencido, você alcança o altar central da Ruína.\nSobre ele repousa a Relíquia Espectral, envolvida por uma névoa brilhante.")
-    print("")
-    
-    print(f"Parabéns, {nomePersonagem}! Você concluiu a aventura da Ruína Fantasmagórica!")
-    
-    print(f"Status final:\nVida: {vida}\nNível: {nivel}\nItens raros: {itensRaros}\nPoções de cura: {pocaoCura}\nPoções de cura grande: {pocaoCuraGrande}")
+    venceu = combate(heroi, guardiao)
+
+    if venceu:
+        pontuacao += 200
+        pontuacao += heroi.vida * 2
+        titulo("VITÓRIA!")
+        print(f"""
+  O Guardião se dissolve em névoa. A ruína desmorona.
+
+  {heroi.nome} escapou! PV restantes: {heroi.vida}
+  Pontuação final: {pontuacao}
+        """)
+        if inventario["amuleto_fantasmagorico"]:
+            print("  O amuleto pulsa. Algo mudou em você para sempre.")
+    else:
+        titulo("DERROTA")
+        print(f"""
+  {heroi.nome} caiu diante do Guardião Fantasma.
+  Pontuação final: {pontuacao}
+        """)
+
+    return pontuacao, inventario
