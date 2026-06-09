@@ -11,6 +11,13 @@ def ataque_mago(contexto: str = "") -> int:
         print(f"[Mago] {contexto}: {resultado}")
     return resultado
 
+
+def ataque_guardiao(contexto: str = "") -> int:
+    resultado = random.randint(2, 12)
+    if contexto:
+        print(f"[Guardião] {contexto}: {resultado}")
+    return resultado
+
 def ataque_arqueiro(contexto: str = "") -> int:
     resultado = random.randint(1, 8)
     if contexto:
@@ -50,6 +57,8 @@ def atacar(classe: str, modificador: int = 0, ca_alvo: int = 10) -> int:
     # Acertou: calcula dano conforme a classe
     if classe == "mago":
         dano = ataque_mago("dano do mago")
+    elif classe == "guardiao":
+        dano = ataque_guardiao("dano do guardião")
     elif classe == "arqueiro":
         dano = ataque_arqueiro("dano do arqueiro")
     elif classe == "cavaleiro":

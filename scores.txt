@@ -1,15 +1,14 @@
-<<<<<<< HEAD
 Jogador: Xande | Classe: Arqueiro | Nível: 1 | Pontuação: 200 | Resultado: Derrota
-
 Jogador: Xande | Classe: Arqueiro | Nível: 1 | Pontuação: 0 | Resultado: Derrota
-
 Jogador: Teste | Classe: Mago | Nível: 1 | Pontuação: 123 | Resultado: Venceu
-
 Jogador: Guizo | Classe: Cavaleiro | Nível: 2 | Pontuação: 529 | Resultado: Venceu
-=======
 Jogador: Lucca | Classe: Mago | Nível: 3 | Pontuação: 250 | Resultado: Vitória
 Jogador: Arthur | Classe: Arqueiro | Nível: 2 | Pontuação: 180 | Resultado: Derrota
 Jogador: Vitor | Classe: Cavaleiro | Nível: 3 | Pontuação: 310 | Resultado: Vitória
 Jogador: Danilo | Classe: Mago | Nível: 4 | Pontuação: 420 | Resultado: Vitória
 Jogador: Cauâ| Classe: Cavaleiro | Nível: 1 | Pontuação: 90 | Resultado: Derrota
->>>>>>> e33e67579afdf2eae94dd35a02624a808dfcea23
+Jogador: fabricio | Classe: Cavaleiro | Nível: 2 | Pontuação: 275 | Resultado: Derrota
+Jogador: Henri | Classe: Cavaleiro | Nível: 2 | Pontuação: 665 | Resultado: Venceu
+Jogador: Alice | Classe: Cavaleiro | Nível: 2 | Pontuação: 587 | Resultado: Venceu
+Jogador: Enzo | Classe: Arqueiro | Nível: 2 | Pontuação: 425 | Resultado: Derrota
+Jogador: Gustavo | Classe: Cavaleiro | Nível: 2 | Pontuação: 671 | Resultado: Venceu
